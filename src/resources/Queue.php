@@ -1,0 +1,22 @@
+<?php
+
+namespace RabbitLib\resources;
+
+trait Queue
+{
+    public function queue(string $dead_letter_exchange = '', array $defineExchange = []):self
+    {
+        $this->channel->queue_declare($this->queue, false, true, false, false, false, $defineExchange);
+        return $this;
+    }
+
+    public function moveToDeadLetterQueue(AMQPMessage $msg)
+    {
+        $msgBody = $msg->getBody();
+
+        $this->publish($msgBody, [
+            'delivery_mode' => 2, // Mensagem persistente
+            'application_headers' => ['x-retry-count' => ['I', 0]],
+        ], $this->letter_route_key);
+    }
+}

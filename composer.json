@@ -1,0 +1,26 @@
+{
+    "name": "techapi/rabbitmq-lib",
+    "description": "Integração RabbitMQ",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+      "psr-4": {
+        "RabbitLib\\": "src/"
+      }
+    },
+    "require": {
+      "php": "^8.2",
+      "illuminate/support": "^11.0 || ^12.0",
+      "php-amqplib/php-amqplib": "^3.7"
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "RabbitLib\\Providers\\RabbitServiceProvider"
+        ],
+        "aliases": {
+          "RabbitLib": "RabbitLib\\Facades\\RabbitLib"
+        }
+      }
+    }
+}
