@@ -33,6 +33,11 @@ class RabbitRepository
 
     public function __construct()
     {
+        $this->host = config('rabbitlib.host');
+        $this->port = config('rabbitlib.port');
+        $this->user = config('rabbitlib.user');
+        $this->password = config('rabbitlib.password');
+
         $this->connect();
     }
 
@@ -41,31 +46,5 @@ class RabbitRepository
         $this->queue = $queue;
         $this->queue();
         return $this;
-    }
-
-    public function setHost(string $host): self
-    {
-        $this->host = $host;
-        return $this;
-    }
-
-    public function setPort(string $port): self
-    {
-        $this->port = $port;
-        return $this;
-    }
-
-    public function setUser(string $user): self
-    {
-        $this->user = $user;
-        return $this;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-        return $this;
-    }
-    
-    
+    }    
 }
