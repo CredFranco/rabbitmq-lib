@@ -26,17 +26,17 @@ class RabbitRepository
 
     protected string $queue = '';
     protected string $host = '';
-    protected string $port = '';
+    protected int $port = 5672;
     protected string $user = '';
     protected string $password = '';
     protected string $vhost = '/';
 
     public function __construct()
     {
-        $this->host = config('rabbitlib.host');
-        $this->port = config('rabbitlib.port');
-        $this->user = config('rabbitlib.user');
-        $this->password = config('rabbitlib.password');
+        $this->host = config('services.rabbitlib.host','');
+        $this->port = config('services.rabbitlib.port',5672);
+        $this->user = config('services.rabbitlib.user','');
+        $this->password = config('services.rabbitlib.password','');
 
         $this->connect();
     }
