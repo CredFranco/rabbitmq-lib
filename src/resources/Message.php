@@ -6,10 +6,10 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 trait Message
 {
-    public function publish($data, array $application_headers = ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT], string $publish_queue = ''):void
+    public function publish($data, string $publish_queue, array $application_headers = ['delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT]):void
     {
         $msg = new AMQPMessage($data, $application_headers);
-        $this->channel->basic_publish($msg, '', $publish_queue == '' ? $this->queue : $publish_queue);
+        $this->channel->basic_publish($msg, '', $publish_queue);
     }
 
     public function consume(string $jobClass, string $queue = '')
