@@ -4,10 +4,25 @@
 
     use Illuminate\Support\Facades\Facade;
 
+    
+
     class RabbitLib extends Facade
     {
-        protected static function getFacadeAccessor()
+        public static string $host = '';
+        public static string $port = '';
+        public static string $user = '';
+        public static string $password = '';
+        public static string $vhost = '/';
+        public static string $queue = '';
+
+        public static function __callStatic($method, $parameters)
         {
-            return \RabbitLib\RabbitRepository::class;
+            return app(\RabbitLib\RabbitRepository::class)
+                ->setHost(static::$host)
+                ->setPort(static::$port)
+                ->setUser(static::$user)
+                ->setPassword(static::$password)
+                ->setQueue(static::$queue)
+                ->$method(...$parameters);
         }
     }

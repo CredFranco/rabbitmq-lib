@@ -10,7 +10,7 @@
     {
         public function register()
         {
-            $this->app->bind(RabbitRepository::class, function () {
+            $this->app->singleton('rabbitlib', function () {
                 return new RabbitRepository();
             });
           //  $this->commands([

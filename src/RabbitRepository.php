@@ -23,46 +23,15 @@ class RabbitRepository
     private int $retryLimit = 3;
     public string $letter_route_key = '';
 
-    public string $host = '';
-    public string $port = '';
-    public string $user = '';
-    public string $password = '';
-    public string $vhost = '/';
-    public string $queue = '';
+    protected string $queue = '';
+    protected string $host = '';
+    protected string $port = '';
+    protected string $user = '';
+    protected string $password = '';
+    protected string $vhost = '/';
 
     public function __construct()
     {
-        $this->host = config('rabbitlib.host');
-        $this->port = config('rabbitlib.port');
-        $this->user = config('rabbitlib.user');
-        $this->password = config('rabbitlib.password');
-        $this->queue = config('rabbitlib.queue');
-
-        if($this->host == ''){
-            throw new \Exception('Host é obrigatório. Você precisa configurar o host no arquivo .env e coloca-lo no serviço de configuração do Laravel');
-        }
-
-        if($this->port == ''){
-            throw new \Exception('Port é obrigatório. Você precisa configurar a porta no arquivo .env e coloca-lo no serviço de configuração do Laravel');
-        }
-        
-        if($this->user == ''){
-            throw new \Exception('User é obrigatório. Você precisa configurar o usuário no arquivo .env e coloca-lo no serviço de configuração do Laravel');
-        }
-
-        if($this->password == ''){
-            throw new \Exception('Password é obrigatório. Você precisa configurar a senha no arquivo .env e coloca-lo no serviço de configuração do Laravel');
-        }
-
-        if($this->vhost == ''){
-            throw new \Exception('Vhost é obrigatório. Você precisa configurar o vhost no arquivo .env e coloca-lo no serviço de configuração do Laravel');
-        }
-
-        if($this->queue == ''){
-            throw new \Exception('Queue é obrigatório. Você precisa configurar a fila no arquivo .env e coloca-lo no serviço de configuração do Laravel');
-        }
-
-
         $this->connect();
     }
 
@@ -72,5 +41,30 @@ class RabbitRepository
         $this->queue();
         return $this;
     }
+
+    public function setHost(string $host): self
+    {
+        $this->host = $host;
+        return $this;
+    }
+
+    public function setPort(string $port): self
+    {
+        $this->port = $port;
+        return $this;
+    }
+
+    public function setUser(string $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+        return $this;
+    }
+    
     
 }
