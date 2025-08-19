@@ -7,6 +7,7 @@ use RabbitLib\resources\Exchange;
 use RabbitLib\resources\Message;
 use RabbitLib\resources\Queue;
 
+
 class RabbitRepository
 {
     use Connection, Exchange, Queue, Message;
