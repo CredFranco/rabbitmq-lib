@@ -32,34 +32,45 @@ class RabbitRepository
 
     public function __construct()
     {
+        $this->host = config('rabbitlib.host');
+        $this->port = config('rabbitlib.port');
+        $this->user = config('rabbitlib.user');
+        $this->password = config('rabbitlib.password');
+        $this->queue = config('rabbitlib.queue');
+
         if($this->host == ''){
-            throw new \Exception('Host é obrigatório');
+            throw new \Exception('Host é obrigatório. Você precisa configurar o host no arquivo .env e coloca-lo no serviço de configuração do Laravel');
         }
 
         if($this->port == ''){
-            throw new \Exception('Port é obrigatório');
+            throw new \Exception('Port é obrigatório. Você precisa configurar a porta no arquivo .env e coloca-lo no serviço de configuração do Laravel');
         }
         
         if($this->user == ''){
-            throw new \Exception('User é obrigatório');
+            throw new \Exception('User é obrigatório. Você precisa configurar o usuário no arquivo .env e coloca-lo no serviço de configuração do Laravel');
         }
 
         if($this->password == ''){
-            throw new \Exception('Password é obrigatório');
+            throw new \Exception('Password é obrigatório. Você precisa configurar a senha no arquivo .env e coloca-lo no serviço de configuração do Laravel');
         }
 
         if($this->vhost == ''){
-            throw new \Exception('Vhost é obrigatório');
+            throw new \Exception('Vhost é obrigatório. Você precisa configurar o vhost no arquivo .env e coloca-lo no serviço de configuração do Laravel');
         }
 
         if($this->queue == ''){
-            throw new \Exception('Queue é obrigatório');
+            throw new \Exception('Queue é obrigatório. Você precisa configurar a fila no arquivo .env e coloca-lo no serviço de configuração do Laravel');
         }
 
 
         $this->connect();
-        $this->queue();
     }
 
+    public function setQueue(string $queue): self
+    {
+        $this->queue = $queue;
+        $this->queue();
+        return $this;
+    }
     
 }
