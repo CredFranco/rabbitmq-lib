@@ -2,6 +2,7 @@
 
 namespace RabbitLib\resources;
 
+use PhpAmqpLib\Message\AMQPMessage;
 trait Queue
 {
     public function queue(string $dead_letter_exchange = '', array $defineExchange = []):self

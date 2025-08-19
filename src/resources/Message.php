@@ -1,6 +1,8 @@
 <?php
 
 namespace RabbitLib\resources;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 trait Message
 {
