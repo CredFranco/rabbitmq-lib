@@ -2,15 +2,12 @@
 
     namespace RabbitLib\Facades;
 
+    use Illuminate\Support\Facades\Facade;
 
-    class RabbitLib
+    class RabbitLib extends Facade
     {
-        protected static string $collection;
-
-        public static function __callStatic($method, $parameters)
+        protected static function getFacadeAccessor()
         {
-            return app(\RabbitLib\RabbitRepository::class)
-                ->setCollection(static::$collection)
-                ->$method(...$parameters);
+            return \RabbitLib\RabbitRepository::class;
         }
     }
