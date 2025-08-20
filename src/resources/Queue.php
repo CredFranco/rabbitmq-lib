@@ -5,9 +5,9 @@ namespace RabbitLib\resources;
 use PhpAmqpLib\Message\AMQPMessage;
 trait Queue
 {
-    public function queue(string $dead_letter_exchange = '', array $defineExchange = []):self
+    public function queue(string $queue_declare,string $dead_letter_exchange = '', array $defineExchange = []):self
     {
-        $this->channel->queue_declare($this->queue, false, true, false, false, false, $defineExchange);
+        $this->channel->queue_declare($queue_declare, false, true, false, false, false, $defineExchange);
         return $this;
     }
 
