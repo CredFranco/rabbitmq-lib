@@ -44,7 +44,7 @@ class RabbitRepository
     public function setQueue(string $queue): self
     {
         $this->queue = $queue;
-        $this->queue();
+        $this->queue($queue);
         return $this;
     }    
 }
