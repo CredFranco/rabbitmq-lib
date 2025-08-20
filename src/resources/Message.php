@@ -12,7 +12,7 @@ trait Message
         $this->channel->basic_publish($msg, '', $publish_queue);
     }
 
-    public function consume(string $jobClass, string $queue = '')
+    public function consume(string $jobClass, string $consume_queue, string $queue = '')
     {
         $callback = function (AMQPMessage $msg) use ($jobClass, $queue) {
             try{
@@ -32,7 +32,7 @@ trait Message
             }
         };
         try{
-            $this->channel->basic_consume($this->queue, '', false, false, false, false, $callback);
+            $this->channel->basic_consume($consume_queue, '', false, false, false, false, $callback);
         }catch(\Exception $e){
             $this->reconnect();
         }
